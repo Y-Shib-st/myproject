@@ -53,3 +53,44 @@ connがソケットに接続され、変数’add’がクライアントのIP�
 
 メッセージはサーバ側でdecode()を用いて復号される
 
+
+Vue.js
+
+参考
+
+https://qiita.com/tky_st/items/03faba81129e4877c3ea
+
+https://qiita.com/tykt/items/5fa6140553e64dab88be
+
+Vue.jeの初期設定
+
+公式サイトに従ってインストールする
+
+$npm install -g @vue/cli
+
+プロジェクトを作成する
+
+$vue create frontend
+
+コンソールに選択肢が出てくるため、Manually select featuresを選択し、Vuexを追加で選択
+
+Vue.jsのバージョンを選択する。
+
+ESlintの設定を選択する。
+
+Lintをかけるタイミングを選択する。
+
+各種設定をどこに置くか選択する。
+
+設定をプリセットとして保存するか選択する。
+
+プロジェクトを作成出来たらコマンドを入力しhttp://localhost:8080　にアクセスする。
+
+$ cd frontend/
+
+$ npm run serve
+
+Vuetifyを利用するためにインストールする。
+
+$ vue add vuetify
+
