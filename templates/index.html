@@ -1,21 +1,23 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>掲示板</title>
-</head>
-<body>
-    <h1>簡単な掲示板</h1>
-    <form method="POST" action="/">
-        <textarea name="message" rows="4" cols="50" placeholder="メッセージを入力してください"></textarea><br>
-        <button type="submit">投稿</button>
+{% extends "layout.html" %}
+{% block content %}
+    <h1>掲示板</h1>
+
+    <form action="/thread" method="post">
+        <label for="thread">新しいスレッドを立てる</label>
+        <input type="text" name="thread">
+        <!-- <textarea name="article" rows="6" cols="100"></textarea>
+        <p></p>
+        <label for="name">名前</label>
+        <input type="text" name="name"> -->
+        <button type="submit">作る</button>
     </form>
-    <h2>投稿一覧</h2>
-    <ul>
-        {% for message in messages %}
-            <li>{{ message }}</li>
-        {% endfor %}
-    </ul>
-</body>
-</html>
+
+    <h2>スレッド一覧</h2>
+    {% for thread in threads: %}
+        <form action="/thread" method="post">
+            <input type="hidden" name="thread" value="{{ thread.threadname }}">
+            <button type="submit">{{ thread.threadname }}</button>
+        </form>
+    {% endfor %}
+
+{% endblock %}
