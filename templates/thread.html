@@ -1,40 +1,32 @@
-{% extends "layout.html" %}
-{% block content %}
-<h1>掲示板</h1>
 
-<form action="/result" method="post">
-    <input type="hidden" name="thread" value="{{ thread }}">
-    <label for="article">投稿</label>
-    <!-- <input type="text" name="article"> -->
-    <textarea name="article" rows="6" cols="100"></textarea>
-    <p></p>
-    <label for="name">名前</label>
-    <input type="text" name="name">
-    <button type="submit">送信する</button>
-</form>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ thread.title }}</title>
+</head>
+<body>
+    <h1>{{ thread.title }}</h1>
+    <form action="/thread/{{ thread.id }}/add_post" method="post">
+        <p>
+            名前: <input type="text" name="name">
+        </p>
+        <p>
+            投稿内容:<br>
+            <textarea name="content" rows="4" cols="50"></textarea>
+        </p>
+        <button type="submit">投稿</button>
+    </form>
 
-<h2>投稿一覧 {{ thread }}</h2>
-
-    <table class="table">
-    <thead class="thead-dark">
-        <tr>
-        <th>日付</th>
-        <th>名前</th>
-        <th>投稿</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for f in articles: %}
-            <tr>
-                <th scope="row">{{ f.pub_date }}</th>
-                <td>{{ f.name }}</td>
-                <td>{{ f.article }}</td>
-            </tr>
-        {% endfor %}
-    </tbody>
-    </table>
-
-<form action="/" method="get">
-    <button type="submit">戻る</button>
-</form>
-{% endblock %}
+    <h2>投稿一覧</h2>
+    {% for post in posts %}
+        <div>
+            <p><strong>{{ post.name }}</strong> ({{ post.date.strftime('%Y-%m-%d %H:%M:%S') }})</p>
+            <p>{{ post.content }}</p>
+            <hr>
+        </div>
+    {% endfor %}
+    <p><a href="/">トップに戻る</a></p>
+</body>
+</html>

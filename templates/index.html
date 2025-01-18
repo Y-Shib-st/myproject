@@ -1,23 +1,26 @@
-{% extends "layout.html" %}
-{% block content %}
-    <h1>掲示板</h1>
 
-    <form action="/thread" method="post">
-        <label for="thread">新しいスレッドを立てる</label>
-        <input type="text" name="thread">
-        <!-- <textarea name="article" rows="6" cols="100"></textarea>
-        <p></p>
-        <label for="name">名前</label>
-        <input type="text" name="name"> -->
-        <button type="submit">作る</button>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>簡易掲示板</title>
+</head>
+<body>
+    <h1>簡易掲示板</h1>
+    <form action="/add_thread" method="post">
+        <p>
+            スレッドタイトル: <input type="text" name="title">
+        </p>
+        <button type="submit">スレッド作成</button>
     </form>
 
     <h2>スレッド一覧</h2>
-    {% for thread in threads: %}
-        <form action="/thread" method="post">
-            <input type="hidden" name="thread" value="{{ thread.threadname }}">
-            <button type="submit">{{ thread.threadname }}</button>
-        </form>
+    {% for thread in threads %}
+        <div>
+            <p><a href="/thread/{{ thread.id }}">{{ thread.title }}</a> ({{ thread.date.strftime('%Y-%m-%d %H:%M:%S') }})</p>
+            <hr>
+        </div>
     {% endfor %}
-
-{% endblock %}
+</body>
+</html>
